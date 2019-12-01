@@ -5,6 +5,18 @@ const hoganMiddleware = require('hogan-middleware')
 //to handle post requests' data
 const bodyParser = require('body-parser')
 
+const mongoose = require('mongoose')
+
+const dbUrl = process.env.DATABASE_URL || 'mongodb://localhost/db-name'
+
+mongoose.connect(dbUrl)
+.then(() => {
+  console.log('DB Connected.')
+})
+.catch(err => {
+  console.log('Error Connecting to DB!')
+})
+
 const app = express() //instantiate app
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'mustache')
